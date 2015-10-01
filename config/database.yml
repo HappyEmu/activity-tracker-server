@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host : localhost #else rake db:setup wont work
+  pool: 5
+  username: postgres
+  password: postgres
+
+development:
+  <<: *default
+  database: tracking-test_development
+
+test:
+  <<: *default
+  database: tracking-test_test
+
+production:
+  <<: *default
+  database: tracking-test_production
+  username: tracking-test
+  password: tracking-test
