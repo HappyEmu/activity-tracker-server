@@ -26,6 +26,8 @@ class TrackingController < ApplicationController
         case v['type']
           when 'acceleration'
             Acceleration.create(v.except 'type')
+          when 'activity'
+            Activity.create(timestamp: v['timestamp'], type: v['text'])
           else
         end
       end
