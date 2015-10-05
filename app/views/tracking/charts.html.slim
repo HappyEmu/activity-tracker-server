@@ -1,7 +1,10 @@
-h1 Charts
-h2 Acceleration count:
-p= Acceleration.count
+h2 Acceleration Sensor
+
+p
+  strong Measurement count:
+  = Acceleration.count
 
 = line_chart accelerations_path, library: { pointSize: 2 }
 
+h2 Activity timeline
 = timeline activities_path

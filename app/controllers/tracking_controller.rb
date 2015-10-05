@@ -7,7 +7,7 @@ class TrackingController < ApplicationController
   end
 
   def accelerations
-    @accelerations = Acceleration.order(timestamp: :desc).limit(100)
+    @accelerations = Acceleration.in_time_frame(30.seconds)
 
     chart_data = [
         { name: 'ax', data: @accelerations.pluck(:timestamp, :ax) },
@@ -26,7 +26,7 @@ class TrackingController < ApplicationController
 
     ActiveRecord::Base.transaction do
       data.each do |v|
-        v['timestamp'] = Time.at(v['timestamp'] / 1000).to_datetime
+        #v['timestamp'] = Time.at(v['timestamp'] / 1000).to_datetime
         case v['type']
           when 'acceleration'
             Acceleration.create(v.except 'type')
