@@ -17,6 +17,10 @@ class TrackingController < ApplicationController
     render json: chart_data.chart_json
   end
 
+  def activities
+    render json: Activity.to_timeline
+  end
+
   def incoming
     data = JSON.parse params[:data]
 
@@ -27,7 +31,7 @@ class TrackingController < ApplicationController
           when 'acceleration'
             Acceleration.create(v.except 'type')
           when 'activity'
-            Activity.create(timestamp: v['timestamp'], type: v['text'])
+            Activity.create(timestamp: v['timestamp'], type_string: v['text'])
           else
         end
       end
